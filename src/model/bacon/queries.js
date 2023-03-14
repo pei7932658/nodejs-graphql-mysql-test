@@ -19,9 +19,6 @@ module.exports = {
                 type: GraphQLFloat
             }
         },
-        length:{
-            limit:GraphQLInt
-        },
         resolve: Bacon.findMatching.bind(Bacon)
     },
     bacon: {

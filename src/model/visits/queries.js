@@ -2,7 +2,8 @@ const { GraphQLList,
         GraphQLID,
         GraphQLString,
         GraphQLInt,
-        GraphQLFloat } = require('graphql')
+        GraphQLFloat, 
+        GraphQLObjectType} = require('graphql')
 const type = require('./type')
 const mutation = require('./mutations')
 const Visit = require("./visit")
@@ -16,10 +17,16 @@ module.exports = {
                 type: GraphQLString
             },
             Service_Time: {
-                type: GraphQLFloat
+                type: GraphQLString
             },
             Service_Status: {
-                type: GraphQLFloat
+                type: GraphQLString
+            },
+            limit: {
+                type: GraphQLInt
+            },
+            order: {
+                type: GraphQLString
             }
         },
         resolve: Visit.findMatching.bind(Visit)

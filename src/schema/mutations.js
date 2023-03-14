@@ -5,6 +5,8 @@ const visitMutation = require('../model/visits/mutations')
 module.exports = new GraphQLObjectType({
     name: 'RootMutationsType',
     fields: {
+        addBacon: baconMutation.addBacon,
+        updateBacon: baconMutation.updateBacon,
         addVisit: visitMutation.addVisit,
         updateVisit: visitMutation.updateVisit
     }

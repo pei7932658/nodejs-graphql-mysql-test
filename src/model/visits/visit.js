@@ -21,16 +21,13 @@ class Visit extends DAO {
      * Returns a list of Visits matching the passed fields
      * @param {*} fields - Fields to be matched
      */
-    static async findMatching(_, fields,limit,order) {
-        console.log(limit)
+    static async findMatching(_, fields) {
         // Returns early with all Visits if no criteria was passed
         if (Object.keys(fields).length === 0) return this.findAll()
         
         // Find matching Visits
         return this.findByFields({
-            fields,
-            limit,
-            order
+            fields
         })
     }
 

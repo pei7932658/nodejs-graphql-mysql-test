@@ -4,7 +4,8 @@ let {
     GraphQLFloat,
     GraphQLObjectType,
     GraphQLNonNull,
-    GraphQLList
+    GraphQLList,
+    GraphQLInt
 } = require('graphql')
 
 // Defines the type

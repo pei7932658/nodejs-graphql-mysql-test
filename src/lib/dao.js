@@ -37,17 +37,33 @@ class DAO {
      * @param {Object} limit - Limits the amount of returned entries
      * @param {Object} order - Orders the returned entries using a provided field
      */
-    static findByFields({fields, limit, order}) {
+    static findByFields({fields}) {
         
         let baseQuery = `SELECT * FROM ?? WHERE `
 
         let params = [this.TABLE_NAME]
 
+        let limit =null
+        let order = {
+            by:"",
+            direction:""
+        }
+
         Object.keys(fields).forEach((key, index) => {
-            baseQuery += `${key} = ?`
-            params.push(fields[key])
-            if (index + 1 !== Object.keys(fields).length) baseQuery += " AND "
+            if(key === "limit"){
+                limit = fields[key]
+
+            }else if(key === "order"){
+                order.by = String(fields[key]).split("#")[0]
+                order.direction = String(fields[key]).split("#")[1]
+
+            }else {
+                baseQuery += ` ${key} = ?`
+                params.push(fields[key])
+                baseQuery += " AND"
+            }
         })
+        baseQuery=baseQuery.substring(0,baseQuery.length-3)
 
         if (order != null && order.by != null && order.direction != null) {
             baseQuery += ` ORDER BY ??`
@@ -59,7 +75,7 @@ class DAO {
             baseQuery += " LIMIT ?"
             params.push(limit)
         }
-
+        console.log(baseQuery)
         return mysql.createQuery({
             query: baseQuery,
             params
